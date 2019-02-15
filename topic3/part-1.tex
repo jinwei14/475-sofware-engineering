@@ -1,0 +1,105 @@
+\documentclass[12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{textcomp}
+\usepackage{amstext}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\makeatletter
+\providecommand{\tabularnewline}{\\}
+
+\usepackage{fourier-orns}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+\usepackage{footmisc}
+\usepackage{subfigure}
+\usepackage{float}
+
+\textwidth=6in
+\topmargin=-1in
+\oddsidemargin = -0.5in
+\parindent=0.0cm
+\parskip=0.3cm
+\textwidth=7.5in
+\textheight= 10in
+
+\sloppy
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{definition}{Definition}[section]
+
+
+\begin{document}
+\pagestyle{empty}
+
+{\bf To what degree can automation help developers 
+deliver software projects more reliably?}
+
+Continuous delivery (CD) aims at reducing time for building, 
+testing, and deploying software, ensuring that software can be 
+released reliably. Automated building pipelines are used to run these
+processes automatically. Generally it can ensure the reliability 
+in two major aspects: reduce manual time and allows developers 
+spend time on more complicated tasks, and avoid human-made among those 
+processes. \\[5px]
+Software build automation is a necessary pre-condition for continuous integration
+and continuous delivery. It can avoid developers' inconsistency with IDEs, 
+including different configuration settings, environment variables, 
+and compilation options. Furthermore, manual builds can have severe human-made errors. 
+Sometimes developers may forget to commit a bug fix, or forget to pull down 
+the latest code to get other people's changes before compiling. Automation can
+eliminate such problems, and ensures software reliability\cite{AutoBuild}. Automated building 
+tools varies, including Github\footnote{https://github.com}, and Team 
+City\footnote{https://www.jetbrains.com/teamcity/}\\[5px]
+Automated testing simplifies some repetitive but necessary testing tasks. 
+When conducting unit, functional, integration and performance tests, 
+automation allows parallel testing, which saves developers'time. Additionally, 
+different parts of builds do not need to pass the full performance-testing suite, 
+but only necessary required tests, and after passing tests they are just moved off 
+to a safer place \cite{DeployProd}. 
+Automated testing also improves reliability by eliminating potential risk 
+of regression error that might take place in manual testing, 
+which means is more likely to encourage more frequent releases or merges. 
+Various automated testing tools come into industry with increasing demands for 
+automated testing, such as the most trending 
+Selenium\footnote{https://www.seleniumhq.org/about/}, 
+TestingWhiz\footnote{https://www.testing-whiz.com}, 
+TestComplete\footnote{https://smartbear.com/product/testcomplete/overview/}, etc.\\[5px]
+Apart from two aspects mentioned at the beginning, automated deployment also allows
+testers deploy a build to anywhere, and trigger a deployment of that build themselves\cite{DeployProd}.
+This means if this build needs to be deployed to a new test environment, 
+or if a new client needs to install it, automation can increase reliability
+by decreasing the overhead of deployment, for the reason that it is repeatable and configurable.
+Octopus\footnote{https://octopus.com} is one of the typical tools used for 
+automated deployment. \\[5px]
+A practical example for automation increasing reliability can be found 
+in feedback of experiencing continuous delivery and Kanban by LeanKit. 
+They uses Kanban to mirror automation process, allowing developers to 
+instantly see where work flows and where work gets stuck, in which way 
+they can stop in time if automation a bad process during development. 
+Additionally, it reduces time for building new functionalities and 
+delivering to customers. Once delivery is faster, feedback from customers
+loops faster, which allows LearnKit make quicker adjustment 
+based on customer feedback\cite{Kanban}. Therefore it improves efficiency of whole develop process
+and reliability of the builds as well. 
+
+{\footnotesize
+\begin{thebibliography}{9}
+  \bibitem{AutoBuild}
+  Enos J. \textbf{Automated Builds: The Key to Consistency}
+  \url{https://www.infoq.com/articles/Automated-Builds}
+  \textit{Date Accessed: 2 February 2019}
+
+    \bibitem{DeployProd}
+    Humble J., Read C., North D. \textbf{The Deployment Production Line}
+    \url{http://continuousdelivery.com/wp-content/uploads/2011/04/deployment_production_line.pdf}
+    \textit{Date Accessed: 31 January 2019}
+
+    \bibitem{Kanban}
+    George C. \textbf{How Kanban Enables Continuous Delivery: LeanKit's Perspective}
+    \url{https://leankit.com/blog/2014/06/kanban-and-continuous-delivery/}
+    \textit{Date Accessed: 2 February 2019}
+\end{thebibliography}
+}
+
+\end{document}

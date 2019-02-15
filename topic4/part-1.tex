@@ -1,0 +1,66 @@
+\documentclass[12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{textcomp}
+\usepackage{amstext}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\makeatletter
+\providecommand{\tabularnewline}{\\}
+
+\usepackage{fourier-orns}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+\usepackage{footmisc}
+\usepackage{subfigure}
+\usepackage{float}
+
+\topmargin=-0.7in
+\oddsidemargin = 0.2in
+\parindent=0.0cm
+\parskip=0.3cm
+\textwidth=6.1in
+\textheight= 10in
+
+\sloppy
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{definition}{Definition}[section]
+
+
+\begin{document}
+\pagestyle{empty}
+
+{\bf Does adopting microservices help with continuous delivery?}
+
+Microservice is a software development architecture which is componentized by breaking down to many small and independent services, which are built around business functions and can be deployed independently through an automated deployment mechanism\cite{no1}.Using microservice can help with continuous delivery. \\[10px]
+Compared to monolithic architecture, microservice architecture is more scalable in terms of business and technology. Microservice divides a complex application into separate services, and the services interact in a loosely coupled form. In continuous delivery, microservice provides many benefits over monolithic architectures. Microservice can remove single points of failure by ensuring that errors in one service do not crash or impact other parts of an application\cite{no2}. Individual microservice can be scaled out independently to provide additional availability and capacity. One of the representative examples is Netflix company\cite{no3}, who adopts microservice to improve deliver more features to their customers, and much faster. Netflix developers build applications as suites of services that can be deployed separately, and allows different services to be written in different programming languages\cite{no3}.The benefit is that developers can update an existing service without rebuilding and redeploying the entire application and quickly deliver new features to their customers.\\[10px]
+Using microservices can increase team efficiency in the continuous delivery. In a monolithic architecture, some changes made to the application may take more time because of the impact on the entire system\cite{no1}. However, if developers split a monolithic system into microservices, each change introduced to the system can only affect an individual service\cite{no4}. Therefore, developers only need to deploy the changed service. For example, implementing an update on a monolithic system will require a 10-minute unit test, 2-hour acceptance test and 20-minute deployment. Because a small change requires the entire monolith to be rebuilt and deployed. By contrast, the same updates in a microservice system only need a 1-minute unit test, 1-minute integration test and 5-minutes deployment\cite{no4}.\\[10px]
+Although microservice provide significant supports for independent development and deployment, it has posed enormous challenges to the organization and technical layers in implementing continuous delivery\cite{no4}. Since services are separate, the independent deployment of each service requires a lot of effort and cost. In microservice architecture, different services need to adopt different technologies based on corresponding demands, which also introduce huge challenges.
+{\footnotesize
+\begin{thebibliography}{9}
+    \bibitem{no1}
+     Fowler M., Lewis J. \textbf{Microservices}
+    \url{https://martinfowler.com/articles/microservices.html}
+    \textit{Date Accessed: 8 February 2019}
+  
+    \bibitem{no2}
+    Guckenheimer S. \textbf{What are Microservice?}
+    \url{https://docs.microsoft.com/en-us/azure/devops/learn/what-are-microservices}
+    \textit{Date Accessed: 8 February 2019}
+    
+
+    \bibitem{no3}
+    Weaveworks \textbf{The Shift to Microservices and Continous Delivery}
+    \url{https://www.weave.works/blog/microservices-and-continuous-delivery}
+    \textit{Date Accessed: 8 February 2019}
+    
+    \bibitem{no4}
+    Alibaba Cloud \textbf{Continuous deployment with microservices}
+    \url{https://medium.com/@Alibaba_Cloud/continuous-deployment-with-microservices-f259dcc60618}
+    \textit{Date Accessed: 8 February 2019}
+    
+\end{thebibliography}
+}
+
+\end{document}
