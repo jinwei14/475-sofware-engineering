@@ -1,0 +1,50 @@
+\documentclass[12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{textcomp}
+\usepackage{amstext}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\makeatletter
+\providecommand{\tabularnewline}{\\}
+
+\usepackage{fourier-orns}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+\usepackage{footmisc}
+\usepackage{subfigure}
+\usepackage{float}
+
+\topmargin=-0.7in
+\oddsidemargin = 0.2in
+\parindent=0.0cm
+\parskip=0.3cm
+\textwidth=6.1in
+\textheight= 10in
+
+\sloppy
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{definition}{Definition}[section]
+
+
+\begin{document}
+\pagestyle{empty}
+
+{\bf What benefits/problems come from deploying services in serverless functions?}
+
+Serverless functions allows developers not need to worry about resources 
+for implementation, while focusing on logic for processing client requests only, 
+and paying for CPU time to infrastructure providers. 
+
+{\footnotesize
+\begin{thebibliography}{9}
+    \bibitem{no1}
+    A. Colyer, \textbf{Serverless computing: economic and architectural impact}
+    \url{https://blog.acolyer.org/2017/10/19/serverless-computing-economic-and-architectural-impact/}
+    \textit{Date Accessed: 21 February 2019}
+    
+\end{thebibliography}
+}
+
+\end{document}
