@@ -1,5 +1,5 @@
 var botBuilder = require('claudia-bot-builder'),
-    excuse = require('huh');
+    api
 
 module.exports = botBuilder(function (request) {
   return 'Thanks for sending ' + request.text  + 
