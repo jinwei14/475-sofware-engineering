@@ -7,7 +7,7 @@
 \usepackage{amssymb}
 \makeatletter
 \providecommand{\tabularnewline}{\\}
-
+\usepackage{mdwlist}
 \usepackage{fourier-orns}
 \usepackage[colorlinks,linkcolor=blue]{hyperref}
 \usepackage{footmisc}
@@ -15,11 +15,11 @@
 \usepackage{float}
 
 \topmargin=-0.7in
-\oddsidemargin = 0.2in
+\oddsidemargin = -0.2in
 \parindent=0.0cm
 \parskip=0.3cm
-\textwidth=6.1in
-\textheight= 10in
+\textwidth=6.9in
+\textheight= 9.8in
 
 \sloppy
 \newtheorem{theorem}{Theorem}[section]
@@ -33,9 +33,22 @@
 
 {\bf What benefits/problems come from deploying services in serverless functions?}
 
-Serverless functions allows developers not need to worry about resources 
-for implementation, while focusing on logic for processing client requests only, 
-and paying for CPU time to infrastructure providers. 
+Benefits:
+\begin{itemize*}
+  \item {\bf Improve develop efficiency:} Serverless computing does not mean developers work without any server. It instead allows them not to focus on issues related to server-based architectures. Therefore, developers can pay more attention to the logic for processing client requests, which can improve efficiency of software development. 
+  \item {\bf Decrease develop cost:} Past IDC and modern cloud architecture, which normally uses a monthly charging mode, can result in the situation that they still charge even if no current users or no applications are deployed. Contrastingly, serverless architecture often uses a Pay-as-you-go mode, which allows developers only pay infrastructure provider for resources they actually used, and not pay for idle capacity. For example, with AWS\footnote{https://aws.amazon.com/pricing/} developers pay only for the individual services, for as long as using periods, and without requiring long-term contracts or complex licensing, which have a potential savings range from 99.8\% to 99.95\%.
+  \item 
+  \item 
+\end{itemize*}
+Problems:
+\begin{itemize*}
+  \item 
+  \item 
+  \item 
+  \item 
+  \item 
+\end{itemize*}
+
 
 {\footnotesize
 \begin{thebibliography}{9}
