@@ -69,3 +69,9 @@ public class WeatherDataServer extends BackEndWebServer {
         new WeatherDataServer(portFrom(args), new WeatherDataSource());
     }
 }
+
+//    The weather data service contains some code to simulate it getting overloaded by bursts of requests.
+//    If you refresh the webpage a few times in quick succession you should see this effect.
+//    Build a circuit breaker between the front end server and the weather data server to control requests
+//    to the weather service, and try to make sure that the user gets a page back quickly, even if it does not contain both news and weather data.
+//    You can change whatever you like in the code.
