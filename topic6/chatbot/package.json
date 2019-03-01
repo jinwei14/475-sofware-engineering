@@ -1,0 +1,26 @@
+{
+  "name": "chatbot",
+  "version": "1.0.0",
+  "description": "chatbot for software coursework",
+  "main": "index.js",
+  "scripts": {
+    "test": "no"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jinwei14/475-sofware-engineering.git"
+  },
+  "keywords": [
+    "coursework"
+  ],
+  "author": "jinweizhang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jinwei14/475-sofware-engineering/issues"
+  },
+  "homepage": "https://github.com/jinwei14/475-sofware-engineering#readme",
+  "dependencies": {
+    "claudia-bot-builder": "^4.5.0",
+    "huh": "^2.0.1"
+  }
+}
