@@ -1,0 +1,73 @@
+\documentclass[12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{textcomp}
+\usepackage{amstext}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\makeatletter
+\providecommand{\tabularnewline}{\\}
+
+\usepackage{fourier-orns}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+\usepackage{footmisc}
+\usepackage{subfigure}
+\usepackage{float}
+
+\topmargin=-0.7in
+\oddsidemargin = -0.25in
+\parindent=0.0cm
+\parskip=0.3cm
+\textwidth=7in
+\textheight= 10in
+
+\sloppy
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{definition}{Definition}[section]
+
+
+\begin{document}
+
+\begin{sloppypar}
+\pagestyle{empty}
+
+{\bf Does moving from a monolith to a microservice architecture help with resilience?}
+
+Microservice architecture is componentized by breaking down into many small and independent services, which can be deployed independently through an automated deployment mechanism. Moving from a monolith to a microservice architecture can help with resilience.
+
+Compared to monolithic architecture, microservice architecture can divide a complex application into simple, highly decoupled services, and these services communicate with each other through lightweight communication mechanisms, such as message queues and HTTP APIs\cite{ct1}. Since these services are independent, when one of the services fails, the others are not affected. In contrast, in a monolithic architecture, the failure of one service affects the entire system. Microservices are highly decoupled and built for failure, which can be capable to cope with failure and outages\cite{ct1}. Many large-scale websites and applications, such as Netflix, Amazon, have all evolved from monolithic to microservices architecture. One of the representative examples is the API team of Netflix company\cite{ct2}. In order to enable members to continue watching movies and TV shows when server failures occur, the API team has restructured the API to enable graceful fallback mechanisms to kick in when a service dependency fails\cite{ct2}. As a result, microservice architectures can eliminate an application's sensitivity to a single point of failure by dispersing functionality across multiple services, which allows applications to perform better, reduce downtime and scale as needed\cite{ct3}. 
+
+In addition, using Circuit Breaker pattern in the microservice architecture can handle faults to improve resilience. Circuit Breaker can accept failures and track those failures\cite{ct4}. If the service is in the failed state, the circuit will send the error message without making a call. If the service is up, then breaker forwards the call to the needed service. The most famous tool for implementing this model is Hystrix from Netflix\cite{ct4}. In this way, it does not cause the client to wait for internal server errors and help Netflix company provide a better user experience.
+
+Through moving from a monolith to a microservice architecture can increase resilience in the application. Furthermore, developers can use some cloud design patterns in the microservices, such as Circuit Breaker\cite{ct4}, Compensating Transaction Pattern\cite{ct4}, Health Endpoint Monitoring Pattern\cite{ct4}, to improve availability and resilience of the application.
+
+
+{\footnotesize
+\begin{thebibliography}{9}
+   \bibitem{ct1}
+   Abbassi, \textbf{  Reliability Is Not Enough-Building Resilient Applications in Microservices}
+   \url{https://blog.giantswarm.io/reliability-not-enough-resilient-applications-containerized-microservices/}
+   \textit{Date Accessed: 1 March 2019}
+
+    \bibitem{ct2}
+    Schmaus, \textbf{Making The Netflix API More Resilient}
+    \url{https://medium.com/netflix-techblog/making-the-netflix-api-more-resilient-a8ec62159c2d}
+    \textit{Date Accessed: 1 March 2019}
+    
+    \bibitem{ct3}
+    MuleSoft, \textbf{Microservices vs Monolithic Architecture}
+    \url{https://www.mulesoft.com/resources/api/microservices-vs-monolithic}
+    \textit{Date Accessed: 1 March 2019}
+    
+    \bibitem{ct4}
+    Jegasingam, \textbf{Circuit Breaker for Microservices}
+    \url{https://medium.com/@jegasingamjeyanthasingam/circuit-breaker-pattern-for-microservices-eb71569dc44d}
+    \textit{Date Accessed: 1 March 2019}
+\end{thebibliography}
+}
+
+
+\end{sloppypar}
+\end{document}
