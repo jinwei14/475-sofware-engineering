@@ -24,11 +24,24 @@ public class MyCaller {
 
     public Long runService(int serviceParam)  {
         try {
+            System.out.println("213");
             return circuitBreaker.execute(() -> myService.somePossiblyLongRunningMethod(serviceParam), breakStrategy, breakHandler);
+
         } catch (TaskExecutionException e) {
             // TaskExecutionException can be thrown by circuit breaker "only and only" if myService.somePossiblyLongRunningMethod thrown exception
             System.out.println("Calling somePossiblyLongRunningMethod resulted in exception: " + e.getTaskException());
             throw new RuntimeException(e.getTaskException().getMessage(), e.getTaskException()); // getTaskExcepition() returns possible exception thrown by myService.somePossiblyLongRunningMethod(serviceParam)
         }
     }
+
+
+        public static void main(String[] args) {
+            MyCaller run  = new MyCaller();
+            run.runService(3);
+            run.runService(3);
+            run.runService(3);
+
+        }
+
+
 }

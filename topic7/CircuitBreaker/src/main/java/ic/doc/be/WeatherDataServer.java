@@ -1,19 +1,15 @@
 package ic.doc.be;
 
-import net.secodo.jcircuitbreaker.breaker.CircuitBreaker;
-import net.secodo.jcircuitbreaker.breaker.impl.DefaultCircuitBreaker;
-import net.secodo.jcircuitbreaker.breakhandler.BreakHandler;
-import net.secodo.jcircuitbreaker.breakhandler.impl.NoActionHandler;
-import net.secodo.jcircuitbreaker.breakstrategy.BreakStrategy;
-import net.secodo.jcircuitbreaker.breakstrategy.impl.SingleExecutionAllowedStrategy;
-import net.secodo.jcircuitbreaker.exception.TaskExecutionException;
 import org.apache.http.client.fluent.Request;
 
 import java.util.concurrent.*;
 
+
 public class WeatherDataServer extends BackEndWebServer {
 
     private static final int DEFAULT_PORT = 5002;
+
+
 
     public WeatherDataServer(int port, DataSource dataSource) throws Exception {
         super(port, dataSource);
@@ -24,30 +20,11 @@ public class WeatherDataServer extends BackEndWebServer {
         private final ExecutorService executorService = Executors.newFixedThreadPool(1);
         private long lastRequestTime;
 
-        private static CircuitBreaker<String> circuitBreaker;
-        private static BreakHandler<String> breakHandler;
-        private static BreakStrategy<String> breakStrategy;
-        // prepare the circuit breaker
-
-
-        public void WeatherDataServer(){
-            this.circuitBreaker = new DefaultCircuitBreaker<>();
-            this.breakStrategy = new SingleExecutionAllowedStrategy<>(); // one execution a time allowed
-            this.breakHandler = new NoActionHandler<>(); // we don't care about "pings" which were skipped
-        }
 
         @Override
         public String data() {
-//            return "Latest temp forecast: " + calculateTemperatureForecast() + " celcius";
 
-            try {
-                return  circuitBreaker.execute( ()  -> "Latest temp forecast: " + calculateTemperatureForecast() + " celcius", breakStrategy, breakHandler);
-            } catch (TaskExecutionException e) {
-                // TaskExecutionException cBuild, Execution, Deployment Build, Execution, Deployment an be thrown by circuit breaker "only and only" iProject Structuref myService.somePossiblyLongRunningMethod thrown exception
-                System.out.println("Calling somePossiblyLongRunningMethod resulted in exception: " + e.getTaskException());
-                throw new RuntimeException(e.getTaskException().getMessage(), e.getTaskException());
-                // getTaskExcepition() returns possible exception thrown by myService.somePossiblyLongRunningMethod(serviceParam)
-            }
+            return "Latest temp forecast: " + calculateTemperatureForecast() + " celcius";
 
         }
 
@@ -71,6 +48,8 @@ public class WeatherDataServer extends BackEndWebServer {
         }
 
         private void busyWork() {
+
+
             long timeSinceLastRequest = currentTime() - lastRequestTime;
             lastRequestTime = currentTime();
             long delay = Math.max(0, 15000 - timeSinceLastRequest);
@@ -78,6 +57,7 @@ public class WeatherDataServer extends BackEndWebServer {
                 System.out.println("WARNING: Overloaded... ");
             }
             try {
+                System.out.println("sleeping time"+ delay);
                 Thread.sleep(delay);
             } catch (InterruptedException e) {
                 new RuntimeException(e);
@@ -100,7 +80,6 @@ public class WeatherDataServer extends BackEndWebServer {
         new WeatherDataServer(portFrom(args), new WeatherDataSource());
     }
 }
-
 //    The weather data service contains some code to simulate it getting overloaded by bursts of requests.
 //    If you refresh the webpage a few times in quick succession you should see this effect.
 //    Build a circuit breaker between the front end server and the weather data server to control requests
