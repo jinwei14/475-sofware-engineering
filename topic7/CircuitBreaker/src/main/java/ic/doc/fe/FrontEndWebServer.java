@@ -45,8 +45,8 @@ public class FrontEndWebServer {
 
         // prepare the circuit breaker
         this.circuitBreaker = new DefaultCircuitBreaker<>();
-        this.breakStrategy = new SingleExecutionAllowedStrategy<>(); // one execution a time allowed
-        this.breakHandler = new ReturnStaticValueHandler<>("no weather due to too many requests"); // we don't care about "pings" which were skipped
+        this.breakStrategy = new SingleExecutionAllowedStrategy<>();
+        this.breakHandler = new ReturnStaticValueHandler<>("no weather due to too many requests");
 
 
         server.start();
@@ -63,9 +63,8 @@ public class FrontEndWebServer {
             try {
                 return circuitBreaker.execute(() -> fetchDataFrom(WEATHER_URI), breakStrategy, breakHandler);
             } catch (TaskExecutionException e) {
-                System.out.println("Calling somePossiblyLongRunningMethod resulted in exception: " + e.getTaskException());
-                throw new RuntimeException(e.getTaskException().getMessage(), e.getTaskException()); // getTaskExcepition() returns possible exception thrown by myService.somePossiblyLongRunningMethod(serviceParam)
-//                return "no weather today";
+                System.out.println("Resulted in exception: " + e.getTaskException());
+                throw new RuntimeException(e.getTaskException().getMessage(), e.getTaskException());
             }
 
         }
