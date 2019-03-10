@@ -1,0 +1,116 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{textcomp}
+\usepackage{amstext}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\makeatletter
+\providecommand{\tabularnewline}{\\}
+\usepackage{mdwlist}
+\usepackage{fourier-orns}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+\usepackage{footmisc}
+\usepackage{subfigure}
+\usepackage{setspace}
+\usepackage{float}
+
+\topmargin=-0.7in
+\oddsidemargin = -0.2in
+\parindent=0.0cm
+\parskip=0.3cm
+\textwidth=6.9in
+\textheight= 9in
+\renewcommand{\baselinestretch}{1.5}
+
+\sloppy
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{definition}{Definition}[section]
+
+
+\begin{document}
+{\bf 475 Software Engineering for Industry} \\
+{\bf Main Coursework - Case Study for Software Engineering in Expedia}\\[10px]
+This essay will discuss in detail what software development strategies are adopted to help the development work in large IT industries. We gained insightful information from an ex-developer who worked for Expedia's advertising group. Below is a summary of all the information we had learned.\\[10px]
+{\bf I. Legacy Code}\\[10px]
+There are many definitions of legacy code, such as the explanation from Wikipedia that \textit{legacy code is source code that relates to a no-longer supported} \cite{no1} or manufactured operating system or other computer technology. Michael Feathers introduced a definition of legacy code as code without tests in his article \textit{Working Effectively with Legacy Code} \cite{no2}. Here, we summarize that legacy code is the source code of an earlier version of the system written by the previous developers, or the code that lacks the corresponding complete documentation and testing. In general, these codes are difficult to handle and maintain but still have some reference value for the current development system. In real industrial software projects, writing legacy code can hit some important deadline due to a range of business reasons. So how to get started with legacy code and effectively modify and apply it is important for project developers.\\[10px]
+In the case study of Expedia, we learned that before using legacy code, programmers should first confirm that they fully understand the requirements of the project and the system development framework, business functions and database architecture. In most cases, project developers can draw diagrams to describe the internal connections amongst components of the system and determine which external systems the legacy component interacts with.  Developers should compare and analyse the technological difference between legacy systems and systems under development - e.g. which technology stacks no longer meet modern development standards and what sections of legacy codes need to be removed as soon as possible. Developers should take responsibility of what they are responsible for and have built, programmers should also routinely identify potential segments of legacy code that needs to be modified or rewritten entirely. The way best way to understand legacy code is not to examine the code alone, but rather to hold a meeting with the original owner. Another useful approach to understand legacy code is to create unit tests or analyse current ones. In real project development, such unit tests are often included in the larger and more important integration tests. The programmer can check if the legacy code could still pass the unit tests and obtain the expected result first. After making changes or commits to the legacy code, the programmer could simply run the same test cases to examine if the test still successfully runs. If the test fails, it means that the code after refactoring is not equivalent to the legacy code. At this point, the programmer should determine the reasons why the new code fails to satisfy the tests - especially if there are boundary cases that are missed, or if there are any specific requirements that have not been met.\\[10px]
+However, the Expedia advertising group stated that developers cannot guarantee to create unit tests for any legacy code. The main reason is that, on one hand, for a legacy system without any automated testing, it usually means that its internal design coupling is very high. On the other hand, the development of legacy code often requires large-scale reconstructions to better maintain the system and make it easier to add new features. Based on this situation, even if unit tests are added to the system, subsequent reconstructions will cause the unit tests to be modified again. One way to solve this problem is to create component tests for legacy code. Compared with unit testing, component testing focuses on business behavior rather than code implementation details \cite{no3}. Therefore, when the details of the code implementation change, it will not be affected. For example, when testing a user-registered API, you can test that the response to the successful scenario of the registered API is correct and send a confirmation email to the user instead of providing multiple user name use cases to the API and testing which user names are legitimate (those should be covered by unit tests of the test user name validator).\\[10px]
+Concluding out meeting with the Expedia advertisement team it was evident that we had to respect legacy code and the developers who wrote it previously. It is important to never judge legacy code or alter it until we have taken the time to fully understand it. The best way to learn legacy code is to start at the user interface level, then back into the code \cite{no4}. For example, we can pick a single user flow, such as logging in, placing an order, writing a review. Go through the flow as an end user. Then starting with the user interface code to follow each step on back, all the way to the database. Besides, when fixing legacy code, programmers should make the minimum variable change \cite{no4} first. Some developers may prefer small, incremental improvements over wholesale re-writes or changes. This means programmers should make the least disruptive change that complete fixes the problem before attempting to clean and refactor any code \cite{no4}. \\[10px]
+{\bf II. Continuous Delivery}\\[10px]
+Continuous Delivery is a popular strategy adopted by most modern software development industries. It is, as described by Jez Humble and Dave Farley (2010), the process of getting changes into production or into the end users in a reliable way. Changes by developers include adding new features, change configuration, bug fixing, and they have to be broken down into smaller parts that can be delivered respectively \cite{no5}. Getting changes into production requires the code to be sustainable, which means that the code should always in a deployable state. To achieve this, it requires automated software building, testing, and deploying, but we only deliver what is potentially profitable and beneficial to the business. Adopting Continuous Delivery allows developers to get feedback from the market in time, which improves software quality and releases better products. \\[10px]
+In our case study of Expedia, the develop team mainly work under the principle of Scrum, which is a development methodology for agile software development, requires a PO, a Scrum Master, and development team. It aims at responding to emerging requirements, and to adapt to evolving technologies and changes in market conditions \cite{no6}. \\[10px]
+As for project management part, some teams in Expedia rely completely on Jira, an issue and project tracking software, while others make a combination of Jira and Mingo, which is also a project management software. He introduced how development teams make use of Jira as an example. Since teams are facing various requirements every day, both from project details or software developers. Requirements contain a general problem description, an expectation for the problem, or a specification of product. Different requirements can be categorized into epics, stories, or tasks, based on the size and complexity of requirements in descent order. Each of epics, stories, and tasks is assigned to different Scrums, through the "tasking meeting", which allow developers to understand the task size, what is requested and what is expected. \\[10px]
+A fixed bi-weekly Sprint is also a component in Scrum in Expedia. Previously, because of the fact that Expedia website updates have a weekly release strategy, any bug fix and small changes have to be conducted at the end of that two weeks, and developers usually address everything discussed on Sprint within a small period just before the deployment, which is not efficient for product development. Specifically, He told that the deployment day for Expedia is Wednesday weekly, and there is a "cut-off time" on Tuesdays that every change made by that time will be deployed to the latest version of their website. This strategy has an obvious drawback that if some new features have to be added, or some emerging bug fix need to be conducted, which is so important that cannot wait until next deployment day, then it becomes a catastrophe. That bug needs to experience a complicated process of fixing, integration, approved by manager and project director, and finally build the implementation from head to tail before deployment. Normally small sub-deployment won't be approved by the director, instead the team will perform some security tricks such as shut down that particular service for a week by switching flags. \\[10px]
+After using continuous delivery, such bug fixing problem becomes a lot easier. Take their mobile web page for instance, developers only need to push a change to the git repository and waits until that change to be deployed. The build pipeline can automatically monitor every commit that developer pushes and begin building. Afterwards, it will conduct automated tests that the team set in advanced, such as unit test, integration test, and squash test (simulating user clicks). Finally, it will perform automated deployment, and the change will be push to cloud and allow user to see the latest Expedia mobile page immediately. Using such CD process is potentially risky, as if someone's push causes small problems, it will directly deliver to user's hand and more severely affect functionality from other parts. Therefore, it requires every developer to bear a high responsibility that every single commit they push represents the entire Expedia company. Specifically, it requires the code in their hands should be production ready at any time and take ownership of what they are doing. There are also push review team to test code in an extremely careful manner before pushing to examine potential possibility about performance decay. Moreover, there are various monitoring parameters recorded on pipeline, such as webpage loading speed. If such parameters decrease dramatically after a particular push, there will be a caveat prompted to reminded that developer to revert if necessary. If every developer can be careful enough and make sufficient test before push and every team works stably, then it is a highly efficient and robust developing system. \\[10px]
+{\bf III. Microservice}\\[10px]
+Micro-services - also known as the micro-service architecture - is an architectural style that structures an application as a collection of services that are highly maintainable and testable, Loosely coupled, Independently deployable \cite{no7}. The idea is to split the application into a set of smaller interconnected smaller services that has its own business logic, some micro-services will expose their REST or other API provided by other services \cite{no8}. \\[10px]
+In Monolithic architecture, it has limited complexity, it is slow compared to the micro-servers, also expensive to scale and update \cite{no8}. Redeployment makes continuous delivery hard to achieve. Since it has a high coupling, the reliability drops down. One small bug could affect the whole program. After interviewing a second-level software engineer from Expedia, he mentioned that microservices was highly used in his online advertisement group. Throughout his career in Expedia, he said the Expedia web was monolithic based back to the second version. It is a single java based application. It contains all their functions in all, such as 'search API', 'search information'. The biggest issue using monolithic which was notably mentioned was that when loading the whole code base into IDE such as IntelliJ or eclipse it takes a lot of time due to its size. Indexing takes hours. Autocomplete also takes a while to load out.  \\[10px]
+In micro-service, applications are decomposed into sub apps, all of the services have their own database. Every sub-app is deployed separately. Microservices enables the continuous delivery/deployment of large, complex applications, which mean using microservers can achieve better scalability \cite{no8}. This point is also mentioned by Anton Kharenko's article. As mentioned by the engineer from Expedia, all their teams will transfer their own server storage to Amazon S3. All the team needs to separate their part in the code base and make their own cloud application from implementation to deployment. After that, all the code base for each team are separated it makes the whole development lose coupled. The advertisement team in Expedia were using JSP for a considerably long time. They develop their own API such as "get ad info", "get slot info", "get ad info services". Due to the reason that there are too many ads on the web, Expedia advertising group wants to manage these advertisements in all, for example, how big is the add, the URL of the ad, what kind of the ad is that. Using an internal API that can be hooked up to a different app (web app, mobile app) and simply us MongoDB to access the database make life easier. \\[10px]
+If you think microservices is 'the perfect solution' then you are probably wrong. it also has some drawbacks. Imaging the database is split, updating database involving updating different databases across the network. The testing is much more complex compared to the monolithic architecture. As mention by this engineer, microservices might lead to a situation that different teams are using different framework and technology. For example, it happened that one team is using backbone js while another team is using react js. However, when using monolithic methodology this issue will not happen since all the developer is using one single code base. All the backend was achieved by java and front-end using freemarker template (FTL). The frontend is very accessible, In one sentence, the technology everyone using is the same. While the advertisement in Expedia is using JSP in microservices, the technology hotel team using does not support JSP any more. This raises the problems that the advertisement team need to develop a unique custom solution to the hotel team. If such conflict happened which team should take responsibility? Moreover, the hotel team and hotel info site team may have the same issue, should info site abandon JSP as well? Another issue that raised is that the time talking to backend becomes longer. Adding one single point dependency is also bad practice to system design. \\[10px]
+Whether using a monolithic architecture or a micro-services really depends on the scale of the applications. 
+Monolithic architecture suits the simple lightweight applications better. 
+For more complex system microservices maybe more suitable. 
+This is also proven by former Google employee steven in his early stage in company Scalyer. 
+What is even more interesting is when people talking about microservices they are talking about 
+using microservices or a giant monolithic, however, in a real system there are many possible services 
+between these two extremes \cite{no9}. Mentioned by the engineer in Expedia that this situation always happens, 
+sometime they will use some bad-practise solution to handle this situation, while the monolithic code base will still exist. 
+Sometime they will write some code to get some information from the old version of the code and add into the could 
+such as \texttt{load\_legacy\_version()} or using iframe to get some information and abandon the frame afterward. 
+Expedia always develop a custom solution to solve this kind of problem this makes it harder. 
+Whether to use microservices also dependent on teams, some team are lazy so that they might not cooperate. It actually needs someone who has a deep insight view of the technology to talk to different teams. The interesting point that mentions by him is that microserver is the trend the software development. However, this could have gone even smaller one servers only responses for one task. Nevertheless, we should not use monolithic for good practice. Using microservers can save tech development operation time since the server is on the cloud.  Another interesting point that mention by him is in Expedia whoever make a build fail, another person needs to fix the issue, this makes the person hate the one who makes the make build fail.
+
+{\footnotesize
+\begin{thebibliography}{9}
+    \bibitem{no1}
+    S. Mullen, \textbf{'Legacy' isn't A Bad Word}
+    \url{https://samuelmullen.com/articles/legacy_isnt_a_bad_word/}
+    \textit{Date Accessed: 1 March 2019}
+    
+    \bibitem{no2}
+    M. Feathers, \textbf{Working Effectively with Legacy Code}
+    \url{http://www.netobjectives.com/system/files/WorkingEffectivelyWithLegacyCode.pdf}
+    \textit{Date Accessed: 3 March 2019}
+
+    \bibitem{no3}
+    M. Fowler, \textbf{Component Testing}
+    \url{https://martinfowler.com/articles/microservice-testing/#testing-component-introduction}
+    \textit{Date Accessed: 6 February 2019}
+
+    \bibitem{no4}
+    B. Sourour, \textbf{How to Conquer Legacy Code}
+    \url{https://medium.freecodecamp.org/conquer-legacy-code-f9e23a6ab758}
+    \textit{Date Accessed: 13 February 2019}
+
+    \bibitem{no5}
+    J. Humble, D. Farley, \textbf{Continuous Delivery}
+    \url{https://continuousdelivery.com}
+    \textit{Date Accessed: 22 February 2019}
+
+    \bibitem{no6}
+    K. Schwaber, J. Sutherland, \textbf{The Scrum Guide}
+    \url{https://www.scrumguides.org/docs/scrumguide/v2016/2016-Scrum-Guide-US.pdf}
+    \textit{Date Accessed: 28 February 2019}
+
+    \bibitem{no7}
+    Kong, \textbf{What are microservices?}
+    \url{https://microservices.io/}
+    \textit{Date Accessed: 5 March 2019}
+
+    \bibitem{no8}
+    A. Kharenko, \textbf{Monolithic vs. Microservices Architecture}
+    \url{https://articles.microservices.com/monolithic-vs-microservices-architecture-5c4848858f59}
+    \textit{Date Accessed: 6 March 2019}
+
+    \bibitem{no9}
+    J. Lumetta, \textbf{Monolith vs microservices: which architecture is right for your team?}
+    \url{https://medium.freecodecamp.org/monolith-vs-microservices-which-architecture-is-right-for-your-team-bb840319d531}
+    \textit{Date Accessed: 7 March 2019}
+\end{thebibliography}
+}
+
+{\bf [Word count: 2489]}
+\end{document}
